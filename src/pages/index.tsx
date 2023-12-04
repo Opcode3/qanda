@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { SearchIcon } from "@/components/searchIcon";
+import { HeartIcon } from "@/components/heartIcon";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,8 +35,10 @@ export default function Home() {
           </label>
         </form>
       </main>
-      <footer className=" text-center flex justify-center">
-        &copy; {date.getFullYear()}. Developed with Love by&nbsp;
+      <footer className=" text-center text-gray-800 flex justify-center">
+        &copy; {date.getFullYear()}. Developed with&nbsp;
+        <HeartIcon />
+        &nbsp;by&nbsp;
         <b>Augustine &amp; Hillary.</b>
       </footer>
     </div>
