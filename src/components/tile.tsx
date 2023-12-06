@@ -33,7 +33,8 @@ const Tile = ({ data }: TileType) => {
           className=" text-blue-500 underline"
           target="_blank"
         >
-          {data.course_name}
+          {" "}
+          Learn more
         </a>
       ) : (
         "No"
