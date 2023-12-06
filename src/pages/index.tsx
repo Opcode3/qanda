@@ -1,46 +1,31 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { SearchIcon } from "@/components/searchIcon";
 import { HeartIcon } from "@/components/heartIcon";
-
-const inter = Inter({ subsets: ["latin"] });
+import Head from "next/head";
+import MainBody from "@/components/mainBody";
 
 const date = new Date();
 
 export default function Home() {
   return (
-    <div className="">
-      <header className=" text-gray-800 bg-white px-[5%] py-6 text-5xl font-extrabold">
-        Qanda
-      </header>
-      <main
-        className={`flex h-[80vh] flex-col items-center justify-between p-24 ${inter.className}`}
-      >
-        <form action="">
-          <label
-            htmlFor="search"
-            className="flex items-center bg-white py-3 px-4 gap-2 rounded-md"
-          >
-            <input
-              type="search"
-              className="outline-none text-gray-800 w-[400px]"
-              name="search"
-              id="search"
-              placeholder="Search data"
-            />
-            <span className="block w-6">
-              {" "}
-              <SearchIcon />{" "}
-            </span>
-          </label>
-        </form>
-      </main>
-      <footer className=" text-center text-gray-800 flex justify-center">
-        &copy; {date.getFullYear()}. Developed with&nbsp;
-        <HeartIcon />
-        &nbsp;by&nbsp;
-        <b>Augustine &amp; Hillary.</b>
-      </footer>
-    </div>
+    <>
+      <div className="hidden lg:block">
+        <header className=" text-gray-800 border-b-[1px] border-gray-200 bg-white px-[5%] pt-2 pb-2 text-3xl font-extrabold">
+          Qanda
+        </header>
+        <Head>
+          <title>Qanda - Question and Answer Program</title>
+        </Head>
+        <MainBody />
+        <footer className=" text-center text-gray-800 flex justify-center">
+          &copy; {date.getFullYear()}. Developed with&nbsp;
+          <HeartIcon />
+          &nbsp;by&nbsp;
+          <b>Augustine &amp; Hillary.</b>
+        </footer>
+      </div>
+      <div className="flex lg:hidden h-screen text-gray-700 items-center justify-center text-center w-[90%] mx-auto">
+        Ooooooops! Mobile screen implementation was not considered while
+        developing this program.
+      </div>
+    </>
   );
 }
