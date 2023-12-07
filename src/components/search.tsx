@@ -42,7 +42,6 @@ const Search = ({ setSearchResults }: SearchType) => {
       // Search in all keys
       results = mergedData.filter((course: string[]) =>
         Object.values(course).some((value) => {
-          console.log(value);
           if (value == null) return "";
           return value
             .toString()

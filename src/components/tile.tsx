@@ -18,7 +18,6 @@ const Tile = ({ data }: TileType) => {
     else if ("concept_uri" in data) return data.concept_uri;
     else return "";
   };
-  //   console.log(Object.entries(data));
   return (
     <li className="border border-gray-600 my-2 rounded p-2">
       {Object.entries(data).map((item) => {

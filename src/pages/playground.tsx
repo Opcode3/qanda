@@ -4,7 +4,6 @@ import React from "react";
 const Playground = () => {
   const data = require("public/db/coursera_1.json");
 
-  // console.log(data);
 
   const reformedData = data.map((item: Course2) => {
     const separateArr = item.level_type_and_duration.split(" · ");
@@ -19,7 +18,6 @@ const Playground = () => {
       item.level_type_and_duration = "";
       return item;
     });
-  // console.log(emptySomething(reformedData));
   return <div>{JSON.stringify(emptySomething([...reformedData]))}</div>;
   // return <p>Jesus</p>
 };

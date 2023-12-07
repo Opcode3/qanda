@@ -8,9 +8,16 @@ import Image from "next/image";
 const inter = Inter({ subsets: ["latin"] });
 
 const MainBodyP = () => {
+  const data_0 = require("public/db/coursera.json");
+
   const [searchResults, setSearchResults] = useState<ResultType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage] = useState(10); // Change this number as per your requirement
+
+  React.useEffect(() => {
+    const startData = [...data_0].sort(() => Math.random() - 0.5);
+    setSearchResults(startData);
+  }, []);
 
   const noResultFoundImage = require("public/no_result_found-removebg-preview.png");
   // Logic to paginate results
