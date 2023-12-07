@@ -5,6 +5,10 @@ import React from "react";
 type SearchType = {
   setSearchResults: React.Dispatch<React.SetStateAction<ResultType[]>>;
 };
+type FilterType = {
+  type: string;
+  value: string;
+};
 
 const Search = ({ setSearchResults }: SearchType) => {
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -25,7 +29,22 @@ const Search = ({ setSearchResults }: SearchType) => {
   const data_12 = require("public/db/skills_en.json");
   const data_13 = require("public/db/transversal_skills_collection_en.json");
 
-  const mergedData = [...data_0, ...data_1, ...data_2, ...data_3, ...data_4, ...data_5, ...data_6, ...data_7, ...data_8, ...data_9, ...data_10, ...data_11, ...data_12, ...data_13];
+  const mergedData = [
+    ...data_0,
+    ...data_1,
+    ...data_2,
+    ...data_3,
+    ...data_4,
+    ...data_5,
+    ...data_6,
+    ...data_7,
+    ...data_8,
+    ...data_9,
+    ...data_10,
+    ...data_11,
+    ...data_12,
+    ...data_13,
+  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -42,7 +61,7 @@ const Search = ({ setSearchResults }: SearchType) => {
       // Search in all keys
       results = mergedData.filter((course: string[]) =>
         Object.values(course).some((value) => {
-          if (value == null) return "";
+          if (value == null || value == undefined) return "";
           return value
             .toString()
             .toLowerCase()
@@ -51,18 +70,36 @@ const Search = ({ setSearchResults }: SearchType) => {
       );
     } else {
       // Search in the selected key
-      results = mergedData.filter((course: any) =>
-        course[searchKey]
+      results = mergedData.filter((course: any) => {
+        if (course == null || course[searchKey] == undefined) return "";
+        console.log(course);
+        return course[searchKey]
           .toString()
           .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      );
+          .includes(searchTerm.toLowerCase());
+      });
     }
 
     const startData = [...results].sort(() => Math.random() - 0.5);
 
     setSearchResults(startData);
   };
+
+  const filter: FilterType[] = [
+    { type: "all", value: "All" },
+    { type: "description", value: "Description" },
+    { type: "title", value: "Title" },
+    { type: "concept_uri", value: "Concept Uri" },
+    { type: "course_by", value: "Course By" },
+    { type: "university", value: "University" },
+    { type: "course_name", value: "Course name" },
+    { type: "isco_group", value: "IscoGroup" },
+    { type: "concept_type", value: "Concept Type" },
+    { type: "preferred_label", value: "Preferred Label" },
+    { type: "alt_labels", value: "Alt Labels" },
+    { type: "course_url", value: "Course URL" },
+    { type: "skills", value: "Skills" },
+  ];
 
   return (
     <form
@@ -99,9 +136,11 @@ const Search = ({ setSearchResults }: SearchType) => {
           onChange={handleSelectChange}
           className=" w-full block border-none outline-none text-sm py-2"
         >
-          <option value="all">All</option>
-          <option value="course_name">Course Name</option>
-          <option value="university">University</option>
+          {filter.map((item) => (
+            <option key={item.type} value={item.type}>
+              {item.value}
+            </option>
+          ))}
         </select>
       </label>
       <button
