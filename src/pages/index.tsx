@@ -1,6 +1,5 @@
 import { HeartIcon } from "@/components/heartIcon";
 import Head from "next/head";
-import MainBody from "@/components/mainBody";
 import MainBodyP from "@/components/mainBodyP";
 
 const date = new Date();

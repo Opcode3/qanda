@@ -2,7 +2,7 @@ import { Course2 } from "@/util/types";
 import React from "react";
 
 const Playground = () => {
-  const data = require("public/db/coursera_0.json");
+  const data = require("public/db/coursera_1.json");
 
   // console.log(data);
 
