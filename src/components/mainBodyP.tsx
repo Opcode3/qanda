@@ -113,6 +113,9 @@ const MainBodyP = () => {
               src={noResultFoundImage}
               alt="No result was found on search"
             />
+            <strong className=" text-xl text-gray-600 font-semibold text-center block">
+              Data not found
+            </strong>
           </div>
         )}
       </div>
