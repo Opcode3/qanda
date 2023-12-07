@@ -1,6 +1,7 @@
 import { HeartIcon } from "@/components/heartIcon";
 import Head from "next/head";
 import MainBody from "@/components/mainBody";
+import MainBodyP from "@/components/mainBodyP";
 
 const date = new Date();
 
@@ -14,7 +15,8 @@ export default function Home() {
         <Head>
           <title>Qanda - Question and Answer Program</title>
         </Head>
-        <MainBody />
+        {/* <MainBody /> */}
+        <MainBodyP />
         <footer className=" text-center text-gray-800 flex justify-center">
           &copy; {date.getFullYear()}. Developed with&nbsp;
           <HeartIcon />

@@ -1,16 +1,20 @@
-import { Course } from "@/util/types";
+import { Course, Course2, ResultType } from "@/util/types";
 import { SearchIcon } from "./searchIcon";
 import React from "react";
 
 type SearchType = {
-  setSearchResults: React.Dispatch<React.SetStateAction<Course[]>>;
+  setSearchResults: React.Dispatch<React.SetStateAction<ResultType[]>>;
 };
 
 const Search = ({ setSearchResults }: SearchType) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchKey, setSearchKey] = React.useState("all");
 
-  const data = require("public/db/coursera.json");
+  const data_0 = require("public/db/coursera.json");
+  const data_2 = require("public/db/coursera_1.json");
+  const data_1 = require("public/db/coursera_1.json");
+
+  const mergedData = [...data_0, ...data_1, ...data_2];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -22,17 +26,22 @@ const Search = ({ setSearchResults }: SearchType) => {
 
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    let results: Course[] = [];
+    let results: ResultType[] = [];
     if (searchKey === "all") {
       // Search in all keys
-      results = data.filter((course: string[]) =>
-        Object.values(course).some((value) =>
-          value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        )
+      results = mergedData.filter((course: string[]) =>
+        Object.values(course).some((value) => {
+          console.log(value);
+          if (value == null) return "";
+          return value
+            .toString()
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase());
+        })
       );
     } else {
       // Search in the selected key
-      results = data.filter((course: any) =>
+      results = mergedData.filter((course: any) =>
         course[searchKey]
           .toString()
           .toLowerCase()
