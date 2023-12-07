@@ -58,7 +58,10 @@ const Search = ({ setSearchResults }: SearchType) => {
           .includes(searchTerm.toLowerCase())
       );
     }
-    setSearchResults(results);
+
+    const startData = [...results].sort(() => Math.random() - 0.5);
+
+    setSearchResults(startData);
   };
 
   return (
