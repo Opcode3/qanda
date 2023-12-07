@@ -14,6 +14,8 @@ const Tile = ({ data }: TileType) => {
   const getURL = (data: ResultType): string => {
     if ("course_url" in data) return data.course_url;
     else if ("url" in data) return data.url;
+    else if ("concept_scheme_uri" in data) return data.concept_scheme_uri;
+    else if ("concept_uri" in data) return data.concept_uri;
     else return "";
   };
   //   console.log(Object.entries(data));
@@ -21,8 +23,11 @@ const Tile = ({ data }: TileType) => {
     <li className="border border-gray-600 my-2 rounded p-2">
       {Object.entries(data).map((item) => {
         if (
-          ! (item[0].includes("description") ||
-          item[0].includes("level_type_and_duration"))
+          !(
+            item[0].includes("description") ||
+            item[0].includes("level_type_and_duration") ||
+            item[0].includes("has_top_concept")
+          )
         ) {
           return (
             <p key={item[0]} className=" text-gray-800">
@@ -36,8 +41,10 @@ const Tile = ({ data }: TileType) => {
         return <b key={item[0]}></b>;
       })}
 
-      {Object.keys(data).indexOf("course_url") ||
-      Object.keys(data).indexOf("url") ? (
+      {Object.keys(data).includes("course_url") ||
+      Object.keys(data).includes("url") ||
+      Object.keys(data).includes("concept_uri") ||
+      Object.keys(data).includes("concept_scheme_uri") ? (
         <a
           href={getURL(data)}
           className=" text-blue-500 underline"
@@ -47,7 +54,7 @@ const Tile = ({ data }: TileType) => {
           Learn more
         </a>
       ) : (
-        "No"
+        ""
       )}
     </li>
   );

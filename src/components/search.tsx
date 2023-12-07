@@ -11,10 +11,21 @@ const Search = ({ setSearchResults }: SearchType) => {
   const [searchKey, setSearchKey] = React.useState("all");
 
   const data_0 = require("public/db/coursera.json");
+  const data_1 = require("public/db/concept_schemes_en.json");
   const data_2 = require("public/db/coursera_1.json");
-  const data_1 = require("public/db/coursera_1.json");
+  const data_3 = require("public/db/dig_comp_skills_collection_en.json");
+  const data_4 = require("public/db/digital_skills_collection_en.json");
+  const data_5 = require("public/db/green_skills_collection_en.json");
+  const data_6 = require("public/db/isco_groups_en.json");
+  const data_7 = require("public/db/language_skills_collection_en.json");
+  const data_8 = require("public/db/occupations_en.json");
+  const data_9 = require("public/db/research_occupations_collection_en.json");
+  const data_10 = require("public/db/research_skills_collection_en.json");
+  const data_11 = require("public/db/skill_groups_en.json");
+  const data_12 = require("public/db/skills_en.json");
+  const data_13 = require("public/db/transversal_skills_collection_en.json");
 
-  const mergedData = [...data_0, ...data_1, ...data_2];
+  const mergedData = [...data_0, ...data_1, ...data_2, ...data_3, ...data_4, ...data_5, ...data_6, ...data_7, ...data_8, ...data_9, ...data_10, ...data_11, ...data_12, ...data_13];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Search from "./search";
 import { Course, ResultType } from "@/util/types";
 import Tile from "./tile";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,16 +12,7 @@ const MainBodyP = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage] = useState(10); // Change this number as per your requirement
 
-  // Simulated data (you might fetch this from an API)
-  const allCourses = [
-    /* Your list of courses */
-  ];
-
-  useEffect(() => {
-    // Logic to fetch data or update searchResults when search query changes
-    // Example: fetchData(searchQuery);
-  }, [searchResults]); // Update this dependency based on when you want to fetch data
-
+  const noResultFoundImage = require("public/no_result_found-removebg-preview.png");
   // Logic to paginate results
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
@@ -35,7 +27,9 @@ const MainBodyP = () => {
   };
 
   const renderPagination = () => {
-    const totalPaginationItems = Math.ceil(searchResults.length / resultsPerPage);
+    const totalPaginationItems = Math.ceil(
+      searchResults.length / resultsPerPage
+    );
     const maxDisplayedButtons = 18; // Maximum number of pagination buttons to display
 
     if (totalPaginationItems <= maxDisplayedButtons) {
@@ -99,13 +93,20 @@ const MainBodyP = () => {
             {/* Pagination */}
 
             {searchResults.length > 0 ? (
-              <ul className="flex items-center justify-center gap-1 py-6">{renderPagination()}</ul>
+              <ul className="flex items-center justify-center gap-1 py-6">
+                {renderPagination()}
+              </ul>
             ) : (
               ""
             )}
           </div>
         ) : (
-          <p>No results found</p>
+          <div className="relative w-[350px] mx-auto mt-[100px]">
+            <Image
+              src={noResultFoundImage}
+              alt="No result was found on search"
+            />
+          </div>
         )}
       </div>
     </main>
