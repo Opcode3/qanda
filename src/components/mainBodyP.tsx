@@ -17,7 +17,7 @@ const MainBodyP = () => {
   React.useEffect(() => {
     const startData = [...data_0].sort(() => Math.random() - 0.5);
     setSearchResults(startData);
-  }, []);
+  }, [data_0]);
 
   const noResultFoundImage = require("public/no_result_found-removebg-preview.png");
   // Logic to paginate results
