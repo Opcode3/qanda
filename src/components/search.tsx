@@ -28,6 +28,7 @@ const Search = ({ setSearchResults }: SearchType) => {
   const data_11 = require("public/db/skill_groups_en.json");
   const data_12 = require("public/db/skills_en.json");
   const data_13 = require("public/db/transversal_skills_collection_en.json");
+  const data_14 = require("public/db/jobscrawlfilterjobsuchek_en.json");
 
   const mergedData = [
     ...data_0,
@@ -44,6 +45,7 @@ const Search = ({ setSearchResults }: SearchType) => {
     ...data_11,
     ...data_12,
     ...data_13,
+    ...data_14,
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,6 +93,7 @@ const Search = ({ setSearchResults }: SearchType) => {
     { type: "title", value: "Title" },
     { type: "concept_uri", value: "Concept Uri" },
     { type: "course_by", value: "Course By" },
+    { type: "occupation", value: "Occupation" },
     { type: "university", value: "University" },
     { type: "course_name", value: "Course name" },
     { type: "isco_group", value: "IscoGroup" },

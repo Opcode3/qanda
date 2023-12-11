@@ -25,7 +25,8 @@ const Tile = ({ data }: TileType) => {
           !(
             item[0].includes("description") ||
             item[0].includes("level_type_and_duration") ||
-            item[0].includes("has_top_concept")
+            item[0].includes("has_top_concept") ||
+            item[0].includes("field")
           )
         ) {
           return (
