@@ -33,17 +33,67 @@ const MainBodyP = () => {
     setCurrentPage(pageNumber);
   };
 
+  // const renderPagination = () => {
+  //   const totalPaginationItems = Math.ceil(
+  //     searchResults.length / resultsPerPage
+  //   );
+  //   const maxDisplayedButtons = 18; // Maximum number of pagination buttons to display
+
+  //   if (totalPaginationItems <= maxDisplayedButtons) {
+  //     return Array(totalPaginationItems)
+  //       .fill(0)
+  //       .map((_, index) => (
+  //         <li key={index} className=" bg-gray-600 rounded ">
+  //           <button
+  //             onClick={() => paginate(index + 1)}
+  //             className="text-sm px-[6px] text-white"
+  //           >
+  //             {index + 1}
+  //           </button>
+  //         </li>
+  //       ));
+  //   } else {
+  //     const maxAllowedButtons = 8; // Maximum buttons to show on each side of the active button
+  //     let start = currentPage - maxAllowedButtons;
+  //     let end = currentPage + maxAllowedButtons;
+
+  //     if (start <= 0) {
+  //       start = 1;
+  //       end = maxDisplayedButtons;
+  //     }
+
+  //     if (end > totalPaginationItems) {
+  //       end = totalPaginationItems;
+  //       start = totalPaginationItems - maxDisplayedButtons + 1;
+  //     }
+
+  //     return Array(end - start + 1)
+  //       .fill(0)
+  //       .map((_, index) => (
+  //         <li key={start + index} className=" bg-gray-600 rounded ">
+  //           <button
+  //             className="text-sm px-[6px] text-white "
+  //             onClick={() => paginate(start + index)}
+  //           >
+  //             {start + index}
+  //           </button>
+  //         </li>
+  //       ));
+  //   }
+  // };
+
   const renderPagination = () => {
     const totalPaginationItems = Math.ceil(
       searchResults.length / resultsPerPage
     );
     const maxDisplayedButtons = 18; // Maximum number of pagination buttons to display
+    const maxAllowedButtons = 4; // Maximum buttons to show on each side of the active button
 
     if (totalPaginationItems <= maxDisplayedButtons) {
       return Array(totalPaginationItems)
         .fill(0)
         .map((_, index) => (
-          <li key={index} className=" bg-gray-600 rounded ">
+          <li key={index} className="bg-gray-600 rounded">
             <button
               onClick={() => paginate(index + 1)}
               className="text-sm px-[6px] text-white"
@@ -53,7 +103,6 @@ const MainBodyP = () => {
           </li>
         ));
     } else {
-      const maxAllowedButtons = 8; // Maximum buttons to show on each side of the active button
       let start = currentPage - maxAllowedButtons;
       let end = currentPage + maxAllowedButtons;
 
@@ -67,18 +116,60 @@ const MainBodyP = () => {
         start = totalPaginationItems - maxDisplayedButtons + 1;
       }
 
-      return Array(end - start + 1)
-        .fill(0)
-        .map((_, index) => (
-          <li key={start + index} className=" bg-gray-600 rounded ">
-            <button
-              className="text-sm px-[6px] text-white "
-              onClick={() => paginate(start + index)}
-            >
-              {start + index}
-            </button>
-          </li>
-        ));
+      const firstPage = (
+        <li key={1} className="bg-gray-600 rounded">
+          <button
+            onClick={() => paginate(1)}
+            className="text-sm px-[6px] text-white"
+          >
+            {1}
+          </button>
+        </li>
+      );
+
+      const lastPage = (
+        <li key={totalPaginationItems} className="bg-gray-600 rounded">
+          <button
+            onClick={() => paginate(totalPaginationItems)}
+            className="text-sm px-[6px] text-white"
+          >
+            {totalPaginationItems}
+          </button>
+        </li>
+      );
+
+      const renderEllipsis = (key: string): JSX.Element => (
+        <li key={key}>
+          <span className="text-sm text-gray-600">....</span>
+        </li>
+      );
+
+      const renderMiddleButtons = () => {
+        const buttons = [];
+        for (let i = start; i <= end; i++) {
+          buttons.push(
+            <li key={i} className="bg-gray-600 rounded">
+              <button
+                className="text-sm px-[6px] text-white"
+                onClick={() => paginate(i)}
+              >
+                {i}
+              </button>
+            </li>
+          );
+        }
+        return buttons;
+      };
+
+      return (
+        <>
+          {firstPage}
+          {start > 2 && renderEllipsis("startEllipsis")}
+          {renderMiddleButtons()}
+          {end < totalPaginationItems - 1 && renderEllipsis("endEllipsis")}
+          {lastPage}
+        </>
+      );
     }
   };
 
