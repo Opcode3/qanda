@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const MainBodyP = () => {
+const MainBody = () => {
   const data_0 = require("public/db/coursera.json");
 
   const [searchResults, setSearchResults] = useState<ResultType[]>([]);
@@ -32,55 +32,6 @@ const MainBodyP = () => {
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-
-  // const renderPagination = () => {
-  //   const totalPaginationItems = Math.ceil(
-  //     searchResults.length / resultsPerPage
-  //   );
-  //   const maxDisplayedButtons = 18; // Maximum number of pagination buttons to display
-
-  //   if (totalPaginationItems <= maxDisplayedButtons) {
-  //     return Array(totalPaginationItems)
-  //       .fill(0)
-  //       .map((_, index) => (
-  //         <li key={index} className=" bg-gray-600 rounded ">
-  //           <button
-  //             onClick={() => paginate(index + 1)}
-  //             className="text-sm px-[6px] text-white"
-  //           >
-  //             {index + 1}
-  //           </button>
-  //         </li>
-  //       ));
-  //   } else {
-  //     const maxAllowedButtons = 8; // Maximum buttons to show on each side of the active button
-  //     let start = currentPage - maxAllowedButtons;
-  //     let end = currentPage + maxAllowedButtons;
-
-  //     if (start <= 0) {
-  //       start = 1;
-  //       end = maxDisplayedButtons;
-  //     }
-
-  //     if (end > totalPaginationItems) {
-  //       end = totalPaginationItems;
-  //       start = totalPaginationItems - maxDisplayedButtons + 1;
-  //     }
-
-  //     return Array(end - start + 1)
-  //       .fill(0)
-  //       .map((_, index) => (
-  //         <li key={start + index} className=" bg-gray-600 rounded ">
-  //           <button
-  //             className="text-sm px-[6px] text-white "
-  //             onClick={() => paginate(start + index)}
-  //           >
-  //             {start + index}
-  //           </button>
-  //         </li>
-  //       ));
-  //   }
-  // };
 
   const renderPagination = () => {
     const totalPaginationItems = Math.ceil(
@@ -214,4 +165,4 @@ const MainBodyP = () => {
   );
 };
 
-export default MainBodyP;
+export default MainBody;

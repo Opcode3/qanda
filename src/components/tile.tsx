@@ -30,8 +30,8 @@ const Tile = ({ data }: TileType) => {
           )
         ) {
           return (
-            <p key={item[0]} className=" text-gray-800">
-              <strong className=" font-black text-black ">
+            <p key={item[0]} className=" text-gray-700">
+              <strong className=" font-bold text-gray-700 ">
                 {reformKeys(item[0])}:
               </strong>{" "}
               {item[1]}{" "}
