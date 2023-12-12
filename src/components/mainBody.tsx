@@ -33,6 +33,97 @@ const MainBody = () => {
     setCurrentPage(pageNumber);
   };
 
+  // const renderPagination = () => {
+  //   const totalPaginationItems = Math.ceil(
+  //     searchResults.length / resultsPerPage
+  //   );
+  //   const maxDisplayedButtons = 18; // Maximum number of pagination buttons to display
+  //   const maxAllowedButtons = 4; // Maximum buttons to show on each side of the active button
+
+  //   if (totalPaginationItems <= maxDisplayedButtons) {
+  //     return Array(totalPaginationItems)
+  //       .fill(0)
+  //       .map((_, index) => (
+  //         <li key={index} className="bg-gray-600 rounded">
+  //           <button
+  //             onClick={() => paginate(index + 1)}
+  //             className="text-sm px-[6px] text-white"
+  //           >
+  //             {index + 1}
+  //           </button>
+  //         </li>
+  //       ));
+  //   } else {
+  //     let start = currentPage - maxAllowedButtons;
+  //     let end = currentPage + maxAllowedButtons;
+
+  //     if (start <= 0) {
+  //       start = 1;
+  //       end = maxDisplayedButtons;
+  //     }
+
+  //     if (end > totalPaginationItems) {
+  //       end = totalPaginationItems;
+  //       start = totalPaginationItems - maxDisplayedButtons + 1;
+  //     }
+
+  //     const firstPage = (
+  //       <li key={1} className="bg-gray-600 rounded">
+  //         <button
+  //           onClick={() => paginate(1)}
+  //           className="text-sm px-[6px] text-white"
+  //         >
+  //           {1}
+  //         </button>
+  //       </li>
+  //     );
+
+  //     const lastPage = (
+  //       <li key={totalPaginationItems} className="bg-gray-600 rounded">
+  //         <button
+  //           onClick={() => paginate(totalPaginationItems)}
+  //           className="text-sm px-[6px] text-white"
+  //         >
+  //           {totalPaginationItems}
+  //         </button>
+  //       </li>
+  //     );
+
+  //     const renderEllipsis = (key: string): JSX.Element => (
+  //       <li key={key}>
+  //         <span className="text-sm text-gray-600">....</span>
+  //       </li>
+  //     );
+
+  //     const renderMiddleButtons = () => {
+  //       const buttons = [];
+  //       for (let i = start; i <= end; i++) {
+  //         buttons.push(
+  //           <li key={i} className="bg-gray-600 rounded">
+  //             <button
+  //               className="text-sm px-[6px] text-white"
+  //               onClick={() => paginate(i)}
+  //             >
+  //               {i}
+  //             </button>
+  //           </li>
+  //         );
+  //       }
+  //       return buttons;
+  //     };
+
+  //     return (
+  //       <>
+  //         {firstPage}
+  //         {start > 2 && renderEllipsis("startEllipsis")}
+  //         {renderMiddleButtons()}
+  //         {end < totalPaginationItems - 1 && renderEllipsis("endEllipsis")}
+  //         {lastPage}
+  //       </>
+  //     );
+  //   }
+  // };
+
   const renderPagination = () => {
     const totalPaginationItems = Math.ceil(
       searchResults.length / resultsPerPage
@@ -73,7 +164,18 @@ const MainBody = () => {
             onClick={() => paginate(1)}
             className="text-sm px-[6px] text-white"
           >
-            {1}
+            {"<<"}
+          </button>
+        </li>
+      );
+
+      const prevPage = (
+        <li key={"prev"} className="bg-gray-600 rounded">
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            className="text-sm px-[6px] text-white"
+          >
+            {"<"}
           </button>
         </li>
       );
@@ -84,14 +186,25 @@ const MainBody = () => {
             onClick={() => paginate(totalPaginationItems)}
             className="text-sm px-[6px] text-white"
           >
-            {totalPaginationItems}
+            {">>"}
+          </button>
+        </li>
+      );
+
+      const nextPage = (
+        <li key={"next"} className="bg-gray-600 rounded">
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            className="text-sm px-[6px] text-white"
+          >
+            {">"}
           </button>
         </li>
       );
 
       const renderEllipsis = (key: string): JSX.Element => (
-        <li key={key}>
-          <span className="text-sm text-gray-600">....</span>
+        <li key={key} className="bg-gray-600 rounded">
+          <span className="text-sm px-[6px] text-white">...</span>
         </li>
       );
 
@@ -101,7 +214,9 @@ const MainBody = () => {
           buttons.push(
             <li key={i} className="bg-gray-600 rounded">
               <button
-                className="text-sm px-[6px] text-white"
+                className={`text-sm px-[6px] text-white ${
+                  i === currentPage ? "font-bold" : ""
+                }`}
                 onClick={() => paginate(i)}
               >
                 {i}
@@ -115,9 +230,11 @@ const MainBody = () => {
       return (
         <>
           {firstPage}
+          {prevPage}
           {start > 2 && renderEllipsis("startEllipsis")}
           {renderMiddleButtons()}
           {end < totalPaginationItems - 1 && renderEllipsis("endEllipsis")}
+          {nextPage}
           {lastPage}
         </>
       );

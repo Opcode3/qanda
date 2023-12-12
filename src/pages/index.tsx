@@ -9,10 +9,10 @@ export default function Home() {
     <>
       <div className="hidden lg:block">
         <header className=" text-gray-800 border-b-[1px] border-gray-200 bg-white px-[5%] pt-2 pb-2 text-3xl font-extrabold">
-          Qanda
+          FAISS
         </header>
         <Head>
-          <title>Qanda - Question and Answer Program</title>
+          <title>FAISS - Question and Answer Program</title>
         </Head>
         {/* <MainBody /> */}
         <MainBody />
