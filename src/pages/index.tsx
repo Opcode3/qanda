@@ -8,8 +8,10 @@ export default function Home() {
   return (
     <>
       <div className="hidden lg:block">
-        <header className=" text-gray-800 border-b-[1px] border-gray-200 bg-white px-[5%] pt-2 pb-2 text-3xl font-extrabold">
-          FAISS
+        <header className="border-b-[1px] border-gray-200 bg-white px-[5%] pt-2 pb-2 ">
+          <a href="" className=" text-gray-800 text-3xl font-extrabold">
+            FAISS
+          </a>
         </header>
         <Head>
           <title>FAISS - Question and Answer Program</title>
